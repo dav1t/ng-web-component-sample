@@ -1,0 +1,38 @@
+<div class="container" [ngClass]="{ container__active: active }">
+  <h2>TIMER</h2>
+  <div class="timer">
+    <div class="hours">
+      <div class="timer__counter">{{ time.hour }}</div>
+      <span class="timer__text">Hours</span>
+    </div>
+    <div class="minutes">
+      <div class="timer__counter">{{ time.minute }}</div>
+      <span class="timer__text">Minutes</span>
+    </div>
+    <div class="seconds">
+      <div class="timer__counter">{{ time.second }}</div>
+      <span class="timer__text">Seconds</span>
+    </div>
+  </div>
+  <div class="controls">
+    <button
+      class="controls__button controls__button--green"
+      (click)="onStart()"
+      [disabled]="active"
+    >
+      START
+    </button>
+    <button class="controls__button" (click)="onReset()">RESET</button>
+    <button class="controls__button controls__button--red" (click)="onStop()">
+      STOP
+    </button>
+  </div>
+</div>
+
+<div class="popup" *ngIf="showPopup">
+  <div class="popup__content">
+    <h2 class="popup__title">Congratulations!</h2>
+    <p class="popup__text">You have finished the task!</p>
+    <button class="popup__button" (click)="showPopup = false">OK</button>
+  </div>
+</div>

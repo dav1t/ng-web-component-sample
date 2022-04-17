@@ -1,16 +1,19 @@
-import { NgModule } from '@angular/core';
+import { DoBootstrap, Injector, NgModule } from '@angular/core';
+import { createCustomElement } from '@angular/elements';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
+import { BoxTimerComponent } from './box-timer/box-timer.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
+  declarations: [BoxTimerComponent],
+  imports: [BrowserModule],
   providers: [],
-  bootstrap: [AppComponent]
+  entryComponents: [BoxTimerComponent],
 })
-export class AppModule { }
+export class AppModule implements DoBootstrap {
+  constructor(injector: Injector) {
+    const timer = createCustomElement(BoxTimerComponent, { injector });
+    customElements.define('box-timer', timer);
+  }
+  ngDoBootstrap(): void {}
+}
